@@ -1,3 +1,6 @@
-const setLocations = (object) => ({type: 'SET_LOCATIONS', payload: {value: object}})
+const setLocations = (object) => ({
+    type: 'SET_LOCATIONS', 
+    payload: {value: object}
+})
 
 export {setLocations}

@@ -1,5 +1,6 @@
 import React, {useEffect} from 'react';
 import { StyleSheet, Text, View, Dimensions, Image, TouchableWithoutFeedback } from 'react-native';
+import Colors from '../constants/style/Colors'
 
 // Redux State Imports
 import {useDispatch, useSelector} from 'react-redux'
@@ -78,16 +79,19 @@ const Landing = (props) => {
                 source={require('../assets/portal.png')} 
                 style={styles.image} />
             </View>
+
             <View style={styles.titleContainer}>
                 <Text style={styles.title}>
                     Welcome To The MortyVerse
                 </Text>
             </View>
+
             <View style={styles.subTextContainer}>
                 <Text style={styles.subText}>
                  The Rick and Morty Adventure App
                 </Text>
             </View>
+
         </View>
         </TouchableWithoutFeedback>
     );
@@ -96,27 +100,32 @@ const Landing = (props) => {
 const styles = StyleSheet.create({
 container: {
 flex: 1,
-backgroundColor: '#fff',
+backgroundColor: Colors.dark.screen,
 alignItems: 'center',
 justifyContent: 'center',
 },
 title: {
 fontFamily: 'cartoon', 
 fontSize: 36, 
-textAlign: 'center'
+textAlign: 'center',
+color: Colors.dark.text
 },
 subText: {
 fontFamily:"adult-swim",
-marginTop: Dimensions.get('window').height / 15
+marginTop: Dimensions.get('window').height / 15,
+color: Colors.dark.text
 },
 imageContainer: {
-height: Dimensions.get('window').height / 2, 
-width: Dimensions.get('window').width * 0.8
+height: Dimensions.get('window').height / 1.9, 
+width: Dimensions.get('window').width * 1.1,
+borderRadius: 20,
+// overflow: 'hidden',
+backgroundColor: Colors.dark.screen
 },
 image: {
 height: '100%', 
 width: '100%', 
-resizeMode: 'contain'
+// resizeMode: 'contain'
 },
 titleContainer: {
 position: 'absolute', 
@@ -125,7 +134,7 @@ justifyContent: 'center',
 alignItems: 'center'
 },
 subTextContainer: {
-borderBottomColor: 'black', 
+borderBottomColor: 'white', 
 borderBottomWidth: 1, 
 justifyContent: 'center', 
 alignItems: 'center'

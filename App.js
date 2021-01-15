@@ -12,7 +12,6 @@ import root from './store/reducers/root'
 // Navigation
 import AuthStack from './navigation/AuthStack'
 
-
 // Redux Store Construction
 const store = createStore(root)
 
