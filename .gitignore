@@ -1,6 +1,7 @@
 node_modules/**/*
 .expo/*
 npm-debug.*
+GoogleService-Info.plist
 *.jks
 *.p8
 *.p12

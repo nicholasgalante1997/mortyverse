@@ -1,5 +1,5 @@
 import React, {useEffect} from 'react';
-import { StyleSheet, Text, View, Dimensions, Image } from 'react-native';
+import { StyleSheet, Text, View, Dimensions, Image, TouchableWithoutFeedback } from 'react-native';
 
 // Redux State Imports
 import {useDispatch, useSelector} from 'react-redux'
@@ -65,8 +65,14 @@ const Landing = (props) => {
         }
       }
 
+      const pushToAuth = () => {
+          props.navigation.navigate('Auth')
+      }
+
     return ( 
+    <TouchableWithoutFeedback onPress={pushToAuth} style={styles.container}>
         <View style={styles.container}>
+        
             <View style={styles.imageContainer}>
                 <Image 
                 source={require('../assets/portal.png')} 
@@ -83,6 +89,7 @@ const Landing = (props) => {
                 </Text>
             </View>
         </View>
+        </TouchableWithoutFeedback>
     );
 }
 

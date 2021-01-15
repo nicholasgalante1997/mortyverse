@@ -9,8 +9,9 @@ import {createStore} from 'redux'
 import {Provider} from 'react-redux'
 import root from './store/reducers/root'
 
-// Screens
-import Landing from './screens/Landing'
+// Navigation
+import AuthStack from './navigation/AuthStack'
+
 
 // Redux Store Construction
 const store = createStore(root)
@@ -31,7 +32,7 @@ export default function App() {
 
   return (
     <Provider store={store}>
-      <Landing />
+      <AuthStack />
    </Provider>
   );
 }
