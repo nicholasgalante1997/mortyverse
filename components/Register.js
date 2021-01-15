@@ -8,6 +8,7 @@ import {
     Dimensions,
     Image
 } from 'react-native'
+import Colors from '../constants/style/Colors'
 
 const Register = (props) => {
 
@@ -38,7 +39,7 @@ const Register = (props) => {
                 <Text style={styles.cartoonTextBottom}>
                     Aw jeez Rick, I don't know, I feel like people today are pretty hesitant to just like hand out their information online?
                 </Text>
-                <Text style={styles.cartoonTextBottom}>
+                <Text style={styles.scribbleTextBottom}>
                 You really think I'm gonna fuck over my fans Morty? I mean this isn't Game of Thrones, it's the Rick and Morty choose your own Adventure app. This is about having adventures, and not caring. 
                 </Text>
             </View>
@@ -48,8 +49,13 @@ const Register = (props) => {
                 source={require('../assets/portal.png')} 
                 style={styles.image} 
                 />
-        
-                <View style={styles.inputContainer}>
+
+                <View style={styles.labelContainer}>
+                    <Text style={styles.registerText}>
+                        Register
+                    </Text>
+                </View>
+                <View style={{...styles.inputContainer, marginTop: 20}}>
                     <TextInput 
                         style={styles.input}
                         value={email}
@@ -87,12 +93,14 @@ const styles = StyleSheet.create({
     },
     title: {
         fontFamily: 'schwifty', 
-        fontSize: 46
+        fontSize: 46,
+        color: Colors.dark.text
     },
     subTitle: {
         fontFamily: 'schwifty', 
         fontSize: 32, 
-        marginTop: 15
+        marginTop: 15,
+        color: Colors.dark.text
     },
     body: {
         width: '90%', 
@@ -103,35 +111,40 @@ const styles = StyleSheet.create({
     },
     scribbleTextTop: {
         fontFamily: 'scribble', 
-        textAlign: 'center'
+        textAlign: 'center',
+        color: Colors.dark.text
     },
     scribbleTextBottom: {
         fontFamily: 'scribble', 
         marginTop: 8, 
-        textAlign: 'center'
+        textAlign: 'center',
+        color: Colors.dark.text
     },
     cartoonTextBottom: {
         fontFamily: 'cartoon', 
         textAlign: 'center', 
-        marginTop: 8
+        marginTop: 8,
+        color: Colors.dark.text
     },
     imageAndInputContainer: {
         height: Dimensions.get('window').height / 3, 
-        width: Dimensions.get('window').width * 0.7, 
+        width: Dimensions.get('window').height / 3,  
         justifyContent: 'center', 
         alignItems: 'center', 
-        marginTop: Dimensions.get('window').height * 0.05 
+        marginTop: Dimensions.get('window').height * 0.10,
+        borderRadius: (Dimensions.get('window').height / 3) / 2, 
     },
     image: {
         height: '100%', 
         width: '100%', 
-        resizeMode: 'contain'
+        // resizeMode: 'contain',
+        borderRadius: (Dimensions.get('window').height / 3) / 2
     },
     inputContainer: {
-        width: '50%', 
+        width: '45%', 
         height: 25, 
         position: 'relative', 
-        bottom: "55%", 
+        bottom: "70%", 
         backgroundColor: 'white',
         paddingLeft: 10,
         justifyContent: 'center',
@@ -140,6 +153,19 @@ const styles = StyleSheet.create({
     input: {
         width: '100%', 
         fontFamily: 'adult-swim'
+    },
+    labelContainer: {
+        position: 'relative', 
+        bottom: "70%", 
+        paddingLeft: 10,
+        justifyContent: 'center',
+        alignItems: 'center',
+        padding: 5
+    },
+    registerText: {
+        fontFamily: 'shrill', 
+        color: 'black', 
+        fontSize: 36
     }
 })
  

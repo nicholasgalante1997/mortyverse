@@ -9,9 +9,6 @@ import Register from '../components/Register'
 
 const AuthScreen = (props) => {
 
-    const [email, setEmail] = useState(``)
-    const [password, setPassword] = useState(``)
-
     const handleRegister = (email, password) => {
         firebase.auth()
         .createUserWithEmailAndPassword(email, password)
