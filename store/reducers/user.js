@@ -9,6 +9,7 @@ export default function user (state=initialState, action){
                 isAuthenticated: true,
                 ...action.payload.value 
             }
-
+        default: 
+            return state;
     }
 }

@@ -11,12 +11,12 @@ import {
 import PickleButton from '../components/PickleButton'
 import Colors from '../constants/style/Colors'
 
-const Register = (props) => {
+const ReturnForm = (props) => {
 
     const [email, setEmail] = useState(``)
     const [password, setPassword] = useState(``)
 
-    const { handleRegister, toggleForm } = props;
+    const { handleSignIn, toggleForm } = props;
 
     return ( 
         <>
@@ -32,16 +32,7 @@ const Register = (props) => {
 
             <View style={styles.body}>
                 <Text style={styles.scribbleTextTop}>
-                    Wha wha what did you think there wasn't going to be a sign in. 
-                </Text>
-                <Text style={styles.scribbleTextBottom}>
-                It's the 21st century Morty of course there's a sign in. 
-                </Text>
-                <Text style={styles.cartoonTextBottom}>
-                    Aw jeez Rick, I don't know, I feel like people today are pretty hesitant to just like hand out their information online?
-                </Text>
-                <Text style={styles.scribbleTextBottom}>
-                You really think I'm gonna fuck over my fans Morty? I mean this isn't Game of Thrones, it's the Rick and Morty choose your own Adventure app. This is about having adventures, and not caring. 
+                    Well, well, well, look who decided to show up.
                 </Text>
             </View>
 
@@ -54,7 +45,7 @@ const Register = (props) => {
 
                 <View style={styles.labelContainer}>
                     <Text style={styles.registerText}>
-                        Register
+                        sign in
                     </Text>
                 </View>
 
@@ -62,6 +53,7 @@ const Register = (props) => {
                     <TextInput 
                         style={styles.input}
                         value={email}
+                        autoCapitalize="none"
                         onChangeText={(text) => setEmail(text)}
                         placeholder="email"
                         placeholderTextColor="black"
@@ -85,13 +77,13 @@ const Register = (props) => {
             
             <TouchableOpacity style={styles.toggleAuthLink} onPress={toggleForm}>
                 <Text style={styles.linkText}>
-                    Returning User?
+                    New User?
                 </Text>
             </TouchableOpacity>
             
             <PickleButton 
-                onPress={() => handleRegister(email, password)} 
-                text="Register!" 
+                onPress={() => handleSignIn(email, password)} 
+                text="Welcome Back!" 
             />
         </>
 
@@ -192,4 +184,4 @@ const styles = StyleSheet.create({
     }
 })
  
-export default Register;
+export default ReturnForm;
