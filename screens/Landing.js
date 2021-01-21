@@ -26,10 +26,6 @@ const Landing = (props) => {
     const chars = useSelector(state => state.characters)
     const epis = useSelector(state => state.episodes)
 
-    console.log(locs, "locs redux")
-    console.log(chars, "character redux")
-    console.log(epis, "episode redux")
-
     useEffect(() => {
         fetchEpisodes()
         .then(episodes => dispatch(episodeActions.setEpisodes(episodes)))
@@ -41,8 +37,29 @@ const Landing = (props) => {
 
     const fetchLocations = async function() {
         try {
+          // Initial Empty Array for Loading of Fetched Results
+          let arr = []
+          // Axios http request to R&M Servers
           const request = await axios.get(LOC_TARGET)
-          return request.data
+          // Variable Assignment ==> For Loop
+          const lastPage = request.data.info.pages  
+          let next = request.data.info.next
+
+          // Set arr to initial http request's results
+          arr = request.data.results
+
+          // Repeat GET Request until final page
+          for (let i=2; i <= lastPage; i++){
+            // Axios get request next page
+            const subsequent = await axios.get(next)
+            // Spread new results into array
+            arr = [...arr, ...subsequent.data.results]
+            // Set next page to new next page
+            next = subsequent.data.info.next
+          }
+
+          return arr 
+
         } catch (err) {
           console.log(err)
         }
@@ -50,8 +67,23 @@ const Landing = (props) => {
       
       const fetchCharacters = async function() {
         try {
+
+          let arr = []
+
           const request = await axios.get(CHAR_TARGET)
-          return request.data
+          const lastPage = request.data.info.pages  
+          let next = request.data.info.next
+
+          arr = request.data.results
+
+          for (let i=2; i <= lastPage; i++){
+            const subsequent = await axios.get(next)
+            arr = [...arr, ...subsequent.data.results]
+            next = subsequent.data.info.next
+          }
+
+          return arr 
+
         } catch (err) {
           console.log(err)
         }
@@ -59,8 +91,23 @@ const Landing = (props) => {
     
       const fetchEpisodes = async function() {
         try {
+
+          let arr = []
+
           const request = await axios.get(EPI_TARGET)
-          return request.data
+          const lastPage = request.data.info.pages  
+          let next = request.data.info.next
+
+          arr = request.data.results
+
+          for (let i=2; i <= lastPage; i++){
+            const subsequent = await axios.get(next)
+            arr = [...arr, ...subsequent.data.results]
+            next = subsequent.data.info.next
+          }
+
+          return arr
+          
         } catch (err) {
           console.log(err)
         }

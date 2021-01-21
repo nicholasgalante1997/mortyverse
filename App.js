@@ -10,7 +10,7 @@ import {Provider} from 'react-redux'
 import root from './store/reducers/root'
 
 // Navigation
-import AuthStack from './navigation/AuthStack'
+import FullStackNavigator from './navigation/FullStackNavigator'
 
 // Redux Store Construction
 const store = createStore(root)
@@ -31,7 +31,7 @@ export default function App() {
 
   return (
     <Provider store={store}>
-      <AuthStack />
+      <FullStackNavigator />
    </Provider>
   );
 }

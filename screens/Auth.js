@@ -5,9 +5,18 @@ import {
     TouchableWithoutFeedback,
     Keyboard
 } from 'react-native'
+
+// Firebase Console Auth Management
 import firebase from '../firebase'
+
+// Local Storage
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
+// Redux Management
 import {useSelector, useDispatch} from 'react-redux'
 import * as userActions from '../store/actions/user'
+
+// Custom Ware
 import Colors from '../constants/style/Colors'
 import Register from '../components/Register'
 import ReturnForm from '../components/Return'
@@ -18,12 +27,23 @@ const AuthScreen = (props) => {
     const user = useSelector(state => state.user)
 
     useEffect(() => {
-        console.log(user)
+        if (user.isAuthenticated){
+            props.navigation.push("Content")
+        }
     }, [user])
 
     const [showRegistration, setShowRegistration] = useState(true)
 
     const toggleRegistration = () => setShowRegistration(prevState => !prevState)
+
+    const storeData = async (key, value) => {
+        try {
+            const jsonObject = JSON.stringify(value)
+            await AsyncStorage.setItem(`@${key}`, jsonObject)
+        } catch (e) {
+            console.log(e)
+        }
+    }
 
     const handleRegister = (email, password) => {
         firebase.auth()
@@ -35,8 +55,10 @@ const AuthScreen = (props) => {
                 storageToken: response.user.refreshToken,
                 uid: response.user.uid
             }
-
-            dispatch(userActions.handleSignIn(dispatchObject))
+            
+            storeData("user", dispatchObject)
+            .then(() => dispatch(userActions.handleSignIn(dispatchObject)))
+            
 
         })
         .catch(err => {
@@ -61,7 +83,9 @@ const AuthScreen = (props) => {
                 uid: response.user.uid
             }
 
-            dispatch(userActions.handleSignIn(dispatchObject))
+            storeData("user", dispatchObject)
+            .then(() => dispatch(userActions.handleSignIn(dispatchObject)))
+
         })
         .catch(err => {
             if (err.code === "auth/user-not-found"){
