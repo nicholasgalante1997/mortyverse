@@ -6,9 +6,11 @@ const GlossaryStack = createStackNavigator({
     GlossaryLanding: {
         screen: GlossaryLanding,
         navigationOptions: {
-            headerTitle: "Find Shit Out",
+            headerTitle: "Character Glossary",
             headerTitleStyle: {
-                fontFamily: 'scribble'
+                fontFamily: 'adult-swim',
+                fontSize: 24,
+                color: '#97ce4c'
             },
             headerLeft: () => null
         }

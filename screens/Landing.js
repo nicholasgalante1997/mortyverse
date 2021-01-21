@@ -2,11 +2,15 @@ import React, {useEffect} from 'react';
 import { StyleSheet, Text, View, Dimensions, Image, TouchableWithoutFeedback } from 'react-native';
 import Colors from '../constants/style/Colors'
 
+// Retrieve Locally Cached User
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
 // Redux State Imports
 import {useDispatch, useSelector} from 'react-redux'
 import * as locationActions from '../store/actions/locations'
 import * as episodeActions from '../store/actions/episodes'
 import * as characterActions from '../store/actions/characters'
+import * as userActions from '../store/actions/user'
 
 // ENDPOINTS FOR API  
 // Location
@@ -22,9 +26,29 @@ const axios = require('axios')
 const Landing = (props) => {
 
     const dispatch = useDispatch();
-    const locs = useSelector(state => state.locations)
-    const chars = useSelector(state => state.characters)
-    const epis = useSelector(state => state.episodes)
+    const user = useSelector(state => state.user)
+    console.log(user, "user")
+
+    const getStoredUserData = async () => {
+      try {
+
+        console.log("in the get Data function")
+        const value = await AsyncStorage.getItem('@user')
+      
+        if(value !== null) {
+          const readable = JSON.parse(value)
+          dispatch(userActions.handleSignIn(readable))
+        } else {
+          console.log("no stored token")
+        }
+      } catch(e) {
+        // error reading value
+      }
+    }
+
+    useEffect(() => {
+      getStoredUserData()
+    }, [])
 
     useEffect(() => {
         fetchEpisodes()
@@ -117,8 +141,12 @@ const Landing = (props) => {
           props.navigation.navigate('Auth')
       }
 
+      const pushToMainContent = () => {
+        props.navigation.navigate("Content")
+      }
+
     return ( 
-    <TouchableWithoutFeedback onPress={pushToAuth} style={styles.container}>
+    <TouchableWithoutFeedback onPress={user.isAuthenticated ? pushToMainContent : pushToAuth} style={styles.container}>
         <View style={styles.container}>
         
             <View style={styles.imageContainer}>

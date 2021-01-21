@@ -44,10 +44,11 @@ const tabScreenConfiguration = {
 const tabOptionsConfiguration = {
     tabBarOptions: {
         labelStyle: {
-            fontFamily: 'adult-swim'
+            fontFamily: 'adult-swim',
+            paddingTop: 30
         },
         activeTintColor: Colors.utility.link,
-        labelPosition: 'above-icon'
+        labelPosition: 'below-icon'
     }
 }
 
