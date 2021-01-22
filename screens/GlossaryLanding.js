@@ -15,20 +15,25 @@ const initialTabState = {
 
 const Glossary = (props) => {
 
-    const [searchedTerm, setSearchedTerm] = useState("")
-    const [filteredCharacters, setFilteredCharacters] = useState(characters)
-    const [tabState, setTabState] = useState(initialTabState)
-    
     const locations = useSelector(state => state.locations)
     const episodes = useSelector(state => state.episodes)
     const characters = useSelector(state => state.characters)
+    const [searchedTerm, setSearchedTerm] = useState("")
+    const [filteredCharacters, setFilteredCharacters] = useState(characters)
+    const [filteredLocations, setFilteredLocations] = useState(locations)
+    const [tabState, setTabState] = useState(initialTabState)
 
     console.table(locations)
-    console.table(episodes)
 
     useEffect(() => {
         if (characters.length > 0){
             setFilteredCharacters(characters.filter(char => char.name.includes(searchedTerm)))
+        }
+    }, [searchedTerm])
+
+    useEffect(() => {
+        if (locations.length > 0){
+            setFilteredLocations(locations.filter(location => location.name.includes(searchedTerm)))
         }
     }, [searchedTerm])
 
@@ -108,7 +113,7 @@ const Glossary = (props) => {
     const locationRenderItem = (itemData) => (
         <View style={{height: 150, width: Dimensions.get('window').width * 0.9, backgroundColor: 'white', flexDirection: 'row', alignItems: 'center', padding: 10}}>
             <View style={{height: 100, width: 100, borderRadius: 30, overflow:'hidden'}}>
-                <Image source={{uri: LocationData.filter(location => location.id === itemData.item.id ).length > 0 ? LocationData.filter(location => location.id === itemData.item.id )[0].image : ""}} style={{height: '100%', width: '100%', resizeMode: 'contain'}}/>
+                <Image source={{uri: LocationData.filter(location => location.id === itemData.item.id ).length > 0 ? LocationData.filter(location => location.id === itemData.item.id )[0].image : ""}} style={{height: '100%', width: '100%', resizeMode: 'cover'}}/>
             </View>
             <View style={{marginLeft: 10, width: '50%'}}>
                 <Text style={{fontFamily: 'adult-swim', color: Colors.utility.link, fontSize: 24}}>
@@ -149,7 +154,7 @@ const Glossary = (props) => {
                 tabState.locations ? 
                 <FlatList 
                     keyExtractor={item => item.id.toString()}
-                    data={locations}
+                    data={filteredLocations}
                     contentContainerStyle={{justifyContent: "center", alignItems: "center"}}
                     style={{width: Dimensions.get('window').width * 0.9, marginTop: 10, borderRadius: 15}}
                     renderItem={locationRenderItem}

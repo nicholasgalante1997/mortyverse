@@ -94,5 +94,45 @@ export default [
     {
         id: 24,
         image: "https://filmdaily.co/wp-content/uploads/2018/06/rick-and-morty-travel-guide-1300x705.jpg"
+    },
+    {
+        id: 25,
+        image: "https://static.wikia.nocookie.net/rickandmorty/images/8/8e/S3e8_the_menagerie.png/revision/latest/top-crop/width/360/height/360?cb=20171023140249"
+    },
+    {
+        id: 26,
+        image: "https://static.wikia.nocookie.net/rickandmorty/images/f/fc/S2e5_Earth.png/revision/latest?cb=20160926065208"
+    },
+    {
+        id: 27,
+        image: "https://img2.looper.com/img/gallery/the-most-disturbing-dimension-ever-visited-on-rick-and-morty/the-dimension-known-as-buttworld-1573075311.jpg"
+    },
+    {
+        id: 28,
+        image: "https://static.wikia.nocookie.net/rickandmorty/images/9/98/S2e3_mount_morty_and_summer.png/revision/latest/top-crop/width/360/height/360?cb=20160923231412"
+    },
+    {
+        id: 29,
+        image: "https://static.wikia.nocookie.net/rickandmorty/images/a/ac/Dorian5.png/revision/latest/top-crop/width/360/height/360?cb=20170819133311"
+    },
+    {
+        id: 30,
+        image: "https://static.wikia.nocookie.net/rickandmorty/images/f/fc/S2e5_Earth.png/revision/latest?cb=20160926065208"
+    },
+    {
+        id: 31,
+        image: "https://static.wikia.nocookie.net/rickandmorty/images/f/fc/S2e5_Earth.png/revision/latest?cb=20160926065208"
+    },
+    {
+        id: 32,
+        image: "https://static.wikia.nocookie.net/rickandmorty/images/9/92/Roy.png/revision/latest/top-crop/width/360/height/360?cb=20160919070029"
+    },
+    {
+        id: 33,
+        image: ""
+    },
+    {
+        id: 34,
+        image: ""
     }
 ]
