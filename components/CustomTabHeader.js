@@ -8,8 +8,9 @@ const CustomTabHeader = (props) => {
     console.log(tabs)
     return ( 
         <View style={styles.bar}>
-            {tabs.map(tab => 
+            {tabs.map((tab, index) => 
             <CustomTab 
+                key={index}
                 text={tab.name} 
                 onPress={tab.onPress} 
                 isActive={tab.isActive} 
@@ -20,7 +21,7 @@ const CustomTabHeader = (props) => {
 
 const styles = StyleSheet.create({
     bar: {
-        width: Dimensions.get('window').width * 0.7,
+        width: Dimensions.get('window').width * 0.9,
         height: Dimensions.get('window').height * 0.05,
         backgroundColor: 'white',
         marginTop: 20,

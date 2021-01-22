@@ -27,12 +27,14 @@ const Landing = (props) => {
 
     const dispatch = useDispatch();
     const user = useSelector(state => state.user)
-    console.log(user, "user")
+
+    useEffect(() => {
+      getStoredUserData()
+    }, [])
 
     const getStoredUserData = async () => {
       try {
 
-        console.log("in the get Data function")
         const value = await AsyncStorage.getItem('@user')
       
         if(value !== null) {
@@ -42,13 +44,9 @@ const Landing = (props) => {
           console.log("no stored token")
         }
       } catch(e) {
-        // error reading value
+        console.log(e)
       }
     }
-
-    useEffect(() => {
-      getStoredUserData()
-    }, [])
 
     useEffect(() => {
         fetchEpisodes()

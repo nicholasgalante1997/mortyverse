@@ -16,14 +16,15 @@ const CustomTab = (props) => {
 
 const styles = StyleSheet.create({
     container: {
-        width: '30%',
+        width: '31%',
         height: '60%',
         justifyContent: 'center',
         alignItems: 'center',
         borderRadius: 15
     },
     text: {
-        fontFamily: 'scribble',
+        fontFamily: 'adult-swim',
+        fontSize: 22,
         color: 'black'
     }
 })
