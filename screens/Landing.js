@@ -34,9 +34,7 @@ const Landing = (props) => {
 
     const getStoredUserData = async () => {
       try {
-
         const value = await AsyncStorage.getItem('@user')
-      
         if(value !== null) {
           const readable = JSON.parse(value)
           dispatch(userActions.handleSignIn(readable))
