@@ -12,6 +12,11 @@ import * as episodeActions from '../store/actions/episodes'
 import * as characterActions from '../store/actions/characters'
 import * as userActions from '../store/actions/user'
 
+//React-Router-Native Imports
+import { useHistory } from 'react-router-native';
+
+//Moment
+import moment from 'moment';
 // ENDPOINTS FOR API  
 // Location
 const LOC_TARGET = `https://rickandmortyapi.com/api/location`
@@ -27,6 +32,7 @@ const Landing = (props) => {
 
     const dispatch = useDispatch();
     const user = useSelector(state => state.user)
+    let history = useHistory();
 
     useEffect(() => {
       getStoredUserData()
@@ -37,12 +43,32 @@ const Landing = (props) => {
         const value = await AsyncStorage.getItem('@user')
         if(value !== null) {
           const readable = JSON.parse(value)
-          dispatch(userActions.handleSignIn(readable))
+          if (timestampValidationOnToken(value)){
+            dispatch(userActions.handleSignIn(readable))
+          } else {
+            resetTokenIfExpired('@user');
+          } 
         } else {
           console.log("no stored token")
         }
       } catch(e) {
         console.log(e)
+      }
+    }
+
+    const timestampValidationOnToken = ({timestamp}) =>  {
+      const adjustedTimestamp = moment(timestamp).add(7, 'd');
+      if (moment().isAfter(adjustedTimestamp)) {
+        return false;
+      }
+      return true;
+    }
+
+    const resetTokenIfExpired = async (key) => {
+      try {
+        await AsyncStorage.removeItem(key);
+      } catch(e) {
+        console.log(e.message);
       }
     }
 
@@ -87,23 +113,17 @@ const Landing = (props) => {
       
       const fetchCharacters = async function() {
         try {
-
           let arr = []
-
           const request = await axios.get(CHAR_TARGET)
           const lastPage = request.data.info.pages  
           let next = request.data.info.next
-
           arr = request.data.results
-
           for (let i=2; i <= lastPage; i++){
             const subsequent = await axios.get(next)
             arr = [...arr, ...subsequent.data.results]
             next = subsequent.data.info.next
           }
-
           return arr 
-
         } catch (err) {
           console.log(err)
         }
@@ -111,34 +131,30 @@ const Landing = (props) => {
     
       const fetchEpisodes = async function() {
         try {
-
           let arr = []
-
           const request = await axios.get(EPI_TARGET)
           const lastPage = request.data.info.pages  
           let next = request.data.info.next
-
           arr = request.data.results
-
           for (let i=2; i <= lastPage; i++){
             const subsequent = await axios.get(next)
             arr = [...arr, ...subsequent.data.results]
             next = subsequent.data.info.next
           }
-
           return arr
-          
         } catch (err) {
           console.log(err)
         }
       }
 
       const pushToAuth = () => {
-          props.navigation.navigate('Auth')
+          // props.navigation.navigate('Auth')
+          history.push('/auth');
       }
 
       const pushToMainContent = () => {
-        props.navigation.navigate("Content")
+        // props.navigation.navigate("Content")
+        history.push('/glossary')
       }
 
     return ( 

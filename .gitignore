@@ -3,6 +3,7 @@ node_modules/**/*
 npm-debug.*
 GoogleService-Info.plist
 firebase.js
+backlog.md
 *.jks
 *.p8
 *.p12

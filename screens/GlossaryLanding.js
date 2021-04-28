@@ -23,8 +23,6 @@ const Glossary = (props) => {
     const [filteredLocations, setFilteredLocations] = useState(locations)
     const [tabState, setTabState] = useState(initialTabState)
 
-    console.table(locations)
-
     useEffect(() => {
         if (characters.length > 0){
             setFilteredCharacters(characters.filter(char => char.name.includes(searchedTerm)))

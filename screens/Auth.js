@@ -6,6 +6,9 @@ import {
     Keyboard
 } from 'react-native'
 
+//React-Router-Native Imports
+import { useHistory } from 'react-router-native';
+
 // Firebase Console Auth Management
 import firebase from '../firebase'
 
@@ -16,7 +19,10 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import {useSelector, useDispatch} from 'react-redux'
 import * as userActions from '../store/actions/user'
 
-// Custom Ware
+// Moment
+import moment from 'moment';
+
+// Custom
 import Colors from '../constants/style/Colors'
 import Register from '../components/Register'
 import ReturnForm from '../components/Return'
@@ -25,10 +31,12 @@ const AuthScreen = (props) => {
 
     const dispatch = useDispatch();
     const user = useSelector(state => state.user)
+    const history = useHistory();
 
     useEffect(() => {
         if (user.isAuthenticated){
-            props.navigation.push("Content")
+            // props.navigation.push("Content")
+            history.push('/glossary');
         }
     }, [user])
 
@@ -53,7 +61,8 @@ const AuthScreen = (props) => {
             const dispatchObject = {
                 username: response.user.email,
                 storageToken: response.user.refreshToken,
-                uid: response.user.uid
+                uid: response.user.uid,
+                timestamp: moment().calendar()
             }
             
             storeData("user", dispatchObject)
