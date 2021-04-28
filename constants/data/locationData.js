@@ -41,7 +41,7 @@ export default [
     },
     {
         id: 11,
-        image: ""
+        image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRIik1h7nJRbUG0tpz1I4ghEbojMcUBo-gnpQ&usqp=CAU"
     },
     {
         id: 12,
@@ -61,7 +61,7 @@ export default [
     },
     {
         id: 16,
-        image: ""
+        image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRIik1h7nJRbUG0tpz1I4ghEbojMcUBo-gnpQ&usqp=CAU"
     },
     {
         id: 17,
@@ -129,10 +129,10 @@ export default [
     },
     {
         id: 33,
-        image: ""
+        image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRIik1h7nJRbUG0tpz1I4ghEbojMcUBo-gnpQ&usqp=CAU"
     },
     {
         id: 34,
-        image: ""
+        image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRIik1h7nJRbUG0tpz1I4ghEbojMcUBo-gnpQ&usqp=CAU"
     }
 ]

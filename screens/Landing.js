@@ -43,7 +43,8 @@ const Landing = (props) => {
         const value = await AsyncStorage.getItem('@user')
         if(value !== null) {
           const readable = JSON.parse(value)
-          if (timestampValidationOnToken(value)){
+          if (timestampValidationOnToken(readable)){
+            console.log(readable);
             dispatch(userActions.handleSignIn(readable))
           } else {
             resetTokenIfExpired('@user');

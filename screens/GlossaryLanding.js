@@ -1,11 +1,16 @@
 import React, {useState, useEffect} from 'react';
-import {View, StyleSheet, Text, FlatList, Image, Dimensions} from 'react-native'
-import Colors from '../constants/style/Colors'
-import { MaterialIcons, AntDesign } from '@expo/vector-icons';
-import SearchBar from '../components/CustomSearch'
-import CustomTabHeader from '../components/CustomTabHeader'
-import {useSelector} from 'react-redux'
-import LocationData from '../constants/data/locationData'
+import {View, StyleSheet, Text, FlatList, Image, Dimensions} from 'react-native';
+
+import {useSelector} from 'react-redux';
+import LocationData from '../constants/data/locationData';
+
+import Colors from '../constants/style/Colors';
+import { MaterialIcons, AntDesign, Ionicons } from '@expo/vector-icons';
+import SearchBar from '../components/CustomSearch';
+import CustomTabHeader from '../components/CustomTabHeader';
+import CustomTabIcon from '../components/CustomTabIcon'
+import Nav from '../components/Nav'
+import Drawer from '../components/Drawer'
 
 const initialTabState = {
     locations: false,
@@ -22,6 +27,10 @@ const Glossary = (props) => {
     const [filteredCharacters, setFilteredCharacters] = useState(characters)
     const [filteredLocations, setFilteredLocations] = useState(locations)
     const [tabState, setTabState] = useState(initialTabState)
+    const [drawerVisible, setDrawerVisible] = useState(false);
+
+    const hideDrawer = () => setDrawerVisible(false);
+    const openDrawer = () => setDrawerVisible(true);
 
     useEffect(() => {
         if (characters.length > 0){
@@ -34,6 +43,8 @@ const Glossary = (props) => {
             setFilteredLocations(locations.filter(location => location.name.includes(searchedTerm)))
         }
     }, [searchedTerm])
+
+    useEffect(() => {console.log(locations)}, [locations])
 
     const tabInfo = [
         {
@@ -111,7 +122,7 @@ const Glossary = (props) => {
     const locationRenderItem = (itemData) => (
         <View style={{height: 150, width: Dimensions.get('window').width * 0.9, backgroundColor: 'white', flexDirection: 'row', alignItems: 'center', padding: 10}}>
             <View style={{height: 100, width: 100, borderRadius: 30, overflow:'hidden'}}>
-                <Image source={{uri: LocationData.filter(location => location.id === itemData.item.id ).length > 0 ? LocationData.filter(location => location.id === itemData.item.id )[0].image : ""}} style={{height: '100%', width: '100%', resizeMode: 'cover'}}/>
+                <Image source={{uri: LocationData.filter(location => location.id === itemData.item.id ).length > 0 ? LocationData.filter(location => location.id === itemData.item.id )[0].image : 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRIik1h7nJRbUG0tpz1I4ghEbojMcUBo-gnpQ&usqp=CAU' }} style={{height: '100%', width: '100%', resizeMode: 'cover'}}/>
             </View>
             <View style={{marginLeft: 10, width: '50%'}}>
                 <Text style={{fontFamily: 'adult-swim', color: Colors.utility.link, fontSize: 24}}>
@@ -133,6 +144,17 @@ const Glossary = (props) => {
 
     return ( 
         <View style={styles.screen}>
+            <Nav 
+                left={() => 
+                    <Ionicons name="menu" 
+                    size={24} 
+                    color="white" 
+                    onPress={openDrawer} 
+                    />} 
+                title="Glossary" 
+                subtitle="Yeah I know just what you wanted" 
+            />
+            <Drawer visible={drawerVisible} toggleVisibility={hideDrawer} />
             <SearchBar 
                 value={searchedTerm} 
                 onChangeText={setSearchedTerm} 
