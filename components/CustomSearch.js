@@ -14,12 +14,6 @@ const SearchBar = (props) => {
                 style={styles.search}
                 returnKeyType="search"
             />
-            <Ionicons 
-                name="search-circle-sharp" 
-                size={36} 
-                color="white"
-                onPress={props.onPress} 
-            />
         </View>
      );
 }
@@ -35,7 +29,7 @@ const styles = StyleSheet.create({
     },
     search: {
         height: '60%',
-        width: '70%',
+        width: '80%',
         backgroundColor: 'white',
         borderRadius: 15,
         fontFamily: 'adult-swim',
