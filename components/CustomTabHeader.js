@@ -5,7 +5,7 @@ import CustomTab from './CustomTab'
 const CustomTabHeader = (props) => {
 
     const {tabs} = props;
-    console.log(tabs)
+
     return ( 
         <View style={styles.bar}>
             {tabs.map((tab, index) => 

@@ -4,7 +4,7 @@ import Colors from '../constants/style/Colors'
 
 const Nav = (props) => {
     const { left, right, title, subtitle } = props;
-    console.log({left})
+
     return (
         <View style={styles.nav}>
             <View style={styles.left}>
