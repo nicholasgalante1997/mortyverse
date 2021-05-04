@@ -1,15 +1,17 @@
 import React, {useState, useEffect} from 'react';
-import {View, Text, StyleSheet, Image, Button, Dimensions} from 'react-native';
+import {View, Text, StyleSheet, Image, Button, Dimensions, FlatList} from 'react-native';
 import { useHistory, useParams } from 'react-router-native';
 import axios from 'axios';
 import LocationImageData from '../constants/data/location';
-import Colors from '../constants/style/Colors'
+import ResidentRow from '../components/ResidentRenderItem';
+import Colors from '../constants/style/Colors';
 import {Ionicons} from '@expo/vector-icons';
 
 const LocationShow = (props) => {
 
     const [id, setId] = useState();
     const [location, setLocation] = useState();
+    const [residents, setResidents] = useState();
 
     const history = useHistory();
     const params = useParams();
@@ -25,8 +27,15 @@ const LocationShow = (props) => {
     }, [id]);
 
     useEffect(() => {
+        if (location){
+            setResidents(location.residents);
+        }
+    }, [location])
+
+    useEffect(() => {
         console.log({location});
-    }, [location]);
+        console.log({residents});
+    }, [location, residents]);
 
     const fetchLocationData = async () => {
         try {
@@ -41,6 +50,10 @@ const LocationShow = (props) => {
             console.log(e);
         }
     }
+
+    const renderItem = (itemData) => (
+        <ResidentRow characterUrl={itemData.item} />
+    )
 
     return (
         <View style={styles.screen}>
@@ -59,6 +72,12 @@ const LocationShow = (props) => {
             <View style={styles.header}>
                 <Text style={styles.headerText}>{location.name}</Text>
             </View>
+            <FlatList 
+                keyExtractor={item => item.id}
+                data={residents}
+                renderItem={renderItem}
+                style={{width: '100%'}}
+            />
             </>:
             <View style={styles.loadingScreen}>
                 <Text style={{color: 'white'}}>
