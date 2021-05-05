@@ -35,7 +35,6 @@ const AuthScreen = (props) => {
 
     useEffect(() => {
         if (user.isAuthenticated){
-            // props.navigation.push("Content")
             history.push('/glossary');
         }
     }, [user])

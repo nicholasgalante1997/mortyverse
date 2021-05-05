@@ -1,8 +1,15 @@
-import React from 'react';
-import { View, Text, StyleSheet, TouchableOpacity, Dimensions } from 'react-native';
+import React, {useState, useEffect} from 'react';
+import { View, Text, StyleSheet, Dimensions } from 'react-native';
+import {useLocation, useHistory} from 'react-router-native';
 import Modal from 'react-native-modal';
 
 const Drawer = ({visible, toggleVisibility}) => {
+
+  const history = useHistory();
+  const location = useLocation();
+
+  console.log({history, location});
+
     return (
         <Modal 
         isVisible={visible}

@@ -149,12 +149,10 @@ const Landing = (props) => {
       }
 
       const pushToAuth = () => {
-          // props.navigation.navigate('Auth')
           history.push('/auth');
       }
 
       const pushToMainContent = () => {
-        // props.navigation.navigate("Content")
         history.push('/glossary')
       }
 

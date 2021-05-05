@@ -132,7 +132,7 @@ const Glossary = (props) => {
         return adaptedLocations;
     }
 
-    const adaptEpisodes = (epiosdes) => {
+    const adaptEpisodes = (episodes) => {
         const adaptedEpisodes = episodes.map(episode => {
             const asset = EpisodeData.filter(episodeSupport => 
                 episodeSupport.episode === episode.episode)[0];
