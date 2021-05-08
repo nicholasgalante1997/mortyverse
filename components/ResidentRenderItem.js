@@ -10,9 +10,9 @@ const ResidentRow = ({characterUrl}) => {
         fetchCharacter();
     }, []);
 
-    useEffect(() => {
-        console.log(character);
-    }, [character])
+    // useEffect(() => {
+    //     console.log(character);
+    // }, [character])
 
     const fetchCharacter = async () => {
         const {data, status, statusText} = await axios.get(characterUrl);

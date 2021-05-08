@@ -1,11 +1,14 @@
 import React, {useState, useEffect} from 'react';
 import {View, Text, StyleSheet, Image, Button, Dimensions, FlatList} from 'react-native';
+
 import { useHistory, useParams } from 'react-router-native';
 import axios from 'axios';
 import LocationImageData from '../constants/data/location';
+
 import ResidentRow from '../components/ResidentRenderItem';
 import Colors from '../constants/style/Colors';
 import {Ionicons} from '@expo/vector-icons';
+import IconHandler from '../components/Icon';
 
 const LocationShow = (props) => {
 
@@ -72,13 +75,22 @@ const LocationShow = (props) => {
             <View style={styles.header}>
                 <Text style={styles.headerText}>{location.name}</Text>
             </View>
+            <View style={styles.subHeader}>
+                <View style={styles.type}>
+                    <IconHandler name={location.type} />
+                    <Text style={styles.typeText}>Type: {location.type}</Text>
+                </View>
+                <View style={styles.dimension}>
+                    
+                </View>
+            </View>
             <FlatList 
                 keyExtractor={item => item.id}
                 data={residents}
                 renderItem={renderItem}
                 style={{width: '100%'}}
             />
-            </>:
+            </> :
             <View style={styles.loadingScreen}>
                 <Text style={{color: 'white'}}>
                     ...Loading
@@ -117,6 +129,25 @@ const styles = StyleSheet.create({
         color: 'white',
         fontFamily: 'adult-swim',
         fontSize: 44,
+    },
+    subHeader: {
+        marginTop: 16,
+        width: Dimensions.get('window').width,
+        padding: 8,
+        justifyContent: 'center',
+        alignItems: 'center'
+    },
+    type: {
+        flexDirection: 'row',
+        justifyContent: 'center',
+        alignItems: 'center',
+        width: '100%'
+    },
+    typeText: {
+        fontSize: 24,
+        fontFamily: 'adult-swim',
+        color: 'white',
+        marginLeft: 24
     }
 });
 

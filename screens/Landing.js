@@ -26,7 +26,7 @@ const CHAR_TARGET = `https://rickandmortyapi.com/api/character`
 const EPI_TARGET = `https://rickandmortyapi.com/api/episode`
 
 // Async Support
-const axios = require('axios')
+import axios from 'axios'
 
 const Landing = (props) => {
 
@@ -44,7 +44,6 @@ const Landing = (props) => {
         if(value !== null) {
           const readable = JSON.parse(value)
           if (timestampValidationOnToken(readable)){
-            console.log(readable);
             dispatch(userActions.handleSignIn(readable))
           } else {
             resetTokenIfExpired('@user');
@@ -74,12 +73,12 @@ const Landing = (props) => {
     }
 
     useEffect(() => {
+        fetchCharacters()
+        .then(chars => dispatch(characterActions.setCharacters(chars)))
         fetchEpisodes()
         .then(episodes => dispatch(episodeActions.setEpisodes(episodes)))
         fetchLocations()
         .then(locations => dispatch(locationActions.setLocations(locations)))
-        fetchCharacters()
-        .then(chars => dispatch(characterActions.setCharacters(chars)))
       }, [])
 
     const fetchLocations = async function() {
@@ -115,15 +114,18 @@ const Landing = (props) => {
       const fetchCharacters = async function() {
         try {
           let arr = []
-          const request = await axios.get(CHAR_TARGET)
-          const lastPage = request.data.info.pages  
-          let next = request.data.info.next
-          arr = request.data.results
+          const req = await fetch(CHAR_TARGET);
+          const request = await req.json();
+          console.log(request);
+          const lastPage = request.info.pages  
+          let next = request.info.next
+          arr = request.results
           for (let i=2; i <= lastPage; i++){
             const subsequent = await axios.get(next)
             arr = [...arr, ...subsequent.data.results]
             next = subsequent.data.info.next
           }
+          console.log("Inside the fetch characters console",arr);
           return arr 
         } catch (err) {
           console.log(err)
@@ -149,7 +151,7 @@ const Landing = (props) => {
       }
 
       const pushToAuth = () => {
-          history.push('/auth');
+        history.push('/auth');
       }
 
       const pushToMainContent = () => {
@@ -159,7 +161,7 @@ const Landing = (props) => {
     return ( 
     <TouchableWithoutFeedback onPress={user.isAuthenticated ? pushToMainContent : pushToAuth} style={styles.container}>
         <View style={styles.container}>
-        
+
             <View style={styles.imageContainer}>
                 <Image 
                 source={require('../assets/portal.png')} 

@@ -61,7 +61,7 @@ const AuthScreen = (props) => {
                 username: response.user.email,
                 storageToken: response.user.refreshToken,
                 uid: response.user.uid,
-                timestamp: moment().calendar()
+                timestamp: moment().format()
             }
             
             storeData("user", dispatchObject)
