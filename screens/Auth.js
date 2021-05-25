@@ -66,8 +66,6 @@ const AuthScreen = (props) => {
             
             storeData("user", dispatchObject)
             .then(() => dispatch(userActions.handleSignIn(dispatchObject)))
-            
-
         })
         .catch(err => {
             if (err.message === "The email address is badly formatted."){
