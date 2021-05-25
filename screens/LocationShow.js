@@ -35,11 +35,6 @@ const LocationShow = (props) => {
         }
     }, [location])
 
-    useEffect(() => {
-        console.log({location});
-        console.log({residents});
-    }, [location, residents]);
-
     const fetchLocationData = async () => {
         try {
             const {data, status, statusText} = await axios.get(`https://rickandmortyapi.com/api/location/${id}`);
@@ -84,11 +79,15 @@ const LocationShow = (props) => {
                     
                 </View>
             </View>
+            <View style={styles.notableHeader}>
+                <Text style={styles.notableHeaderText}>Notable Residents</Text>
+            </View>
             <FlatList 
                 keyExtractor={item => item.id}
                 data={residents}
                 renderItem={renderItem}
-                style={{width: '100%'}}
+                style={{width: '90%',borderRadius: 16, backgroundColor: 'black'}}
+                contentContainerStyle={{alignItems: 'center', padding: 4}}
             />
             </> :
             <View style={styles.loadingScreen}>
@@ -148,6 +147,16 @@ const styles = StyleSheet.create({
         fontFamily: 'adult-swim',
         color: 'white',
         marginLeft: 24
+    },
+    notableHeader: {
+        marginVertical: 8,
+        borderBottomColor: 'black',
+        borderBottomWidth: 5
+    },
+    notableHeaderText: {
+        fontFamily: 'cartoon',
+        fontSize: 32,
+        color: 'white'
     }
 });
 
