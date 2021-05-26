@@ -17,7 +17,7 @@ const iconSet = {
 }
 
 const handler = (name) => {
-    return (iconSet[name])() || iconSet['unknown']();
+    return iconSet[name]?.() || iconSet['unknown'];
 } 
 
 const Icon = ({name}) => {
